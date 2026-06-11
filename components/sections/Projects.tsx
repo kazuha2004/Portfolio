@@ -1,6 +1,6 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { ExternalLink, Star, Zap } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ExternalLink } from 'lucide-react';
 
 const GithubIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -10,46 +10,8 @@ const GithubIcon = ({ size = 14 }: { size?: number }) => (
 
 const PROJECTS = [
   {
-    id: 'ai-interviewer',
-    num: '01',
-    title: 'AI Interviewer',
-    tagline: 'Real-time AI-powered technical interview simulator',
-    description:
-      'Conducts live technical interviews using OpenAI GPT-4. Generates adaptive questions, evaluates answers in real-time, and produces detailed feedback reports. Deployed for 100+ users.',
-    tags: ['Python', 'Django', 'Next.js', 'OpenAI API', 'MongoDB'],
-    tagColor: 'purple',
-    accent: '#7C3AED',
-    accentGlow: 'rgba(124,58,237,0.2)',
-    accentBorder: 'rgba(124,58,237,0.25)',
-    live: '#',
-    github: 'https://github.com/kazuha2004',
-    stats: [
-      { label: 'Adaptive Questions', value: 'GPT-4' },
-      { label: 'Real-time Eval', value: '< 1s' },
-    ],
-  },
-  {
-    id: 'taskflow',
-    num: '02',
-    title: 'TaskFlow Manager',
-    tagline: 'Drag-and-drop Kanban for engineering teams',
-    description:
-      'Full-stack project management with real-time drag-and-drop Kanban boards, JWT auth, team workspaces, and deadline tracking. Improved workflow efficiency by 40%.',
-    tags: ['Next.js', 'Django', 'MongoDB', 'JWT', 'Tailwind'],
-    tagColor: 'cyan',
-    accent: '#06B6D4',
-    accentGlow: 'rgba(6,182,212,0.2)',
-    accentBorder: 'rgba(6,182,212,0.25)',
-    live: '#',
-    github: 'https://github.com/kazuha2004',
-    stats: [
-      { label: 'Efficiency Boost', value: '+40%' },
-      { label: 'Real-time Sync', value: 'WebSockets' },
-    ],
-  },
-  {
     id: 'lumiface',
-    num: '03',
+    num: '01',
     title: 'LUMIFACE',
     tagline: 'Patent-pending AI attendance via facial recognition',
     description:
@@ -60,17 +22,36 @@ const PROJECTS = [
     accentGlow: 'rgba(245,158,11,0.2)',
     accentBorder: 'rgba(245,158,11,0.25)',
     live: '#',
-    github: 'https://github.com/kazuha2004',
-    patent: '📜 Patent Filed — App No: 202511051742',
+    github: 'https://github.com/kazuha2004/FACE_RECOGNITION_ATTENDANCE_SYSTEM',
+    patent: 'Patent Filed — App No: 202511051742 A',
     stats: [
       { label: 'Faces/Day', value: '500+' },
       { label: 'Accuracy', value: '75%+' },
-      { label: 'Time Saved', value: '87%' },
+      { label: 'Time Saved', value: '15m → 2m' },
+    ],
+  },
+  {
+    id: 'ai-interviewer',
+    num: '02',
+    title: 'AI Interviewer',
+    tagline: 'Real-time AI-powered technical interview simulator',
+    description:
+      'Conducts live technical interviews using OpenAI GPT-4. Generates adaptive questions, evaluates answers in real-time, and produces detailed feedback reports. Deployed for 100+ users.',
+    tags: ['Python', 'Django', 'Next.js', 'OpenAI API', 'MongoDB'],
+    tagColor: 'purple',
+    accent: '#7C3AED',
+    accentGlow: 'rgba(124,58,237,0.2)',
+    accentBorder: 'rgba(124,58,237,0.25)',
+    live: 'https://ai-interviewer-chi-henna.vercel.app/',
+    github: 'https://github.com/kazuha2004',
+    stats: [
+      { label: 'Adaptive Questions', value: 'GPT-4' },
+      { label: 'Real-time Eval', value: '< 1s' },
     ],
   },
   {
     id: 'kazuha-closet',
-    num: '04',
+    num: '03',
     title: 'Kazuha Closet',
     tagline: 'Live e-commerce platform — Founder & Full-Stack Dev',
     description:
@@ -80,12 +61,31 @@ const PROJECTS = [
     accent: '#F43F5E',
     accentGlow: 'rgba(244,63,94,0.2)',
     accentBorder: 'rgba(244,63,94,0.25)',
-    live: 'https://kazuhacloset.in',
+    live: 'https://www.kazuhacloset.com',
     github: 'https://github.com/kazuha2004',
     founder: true,
     stats: [
       { label: 'Engagement Uplift', value: '+30%' },
       { label: 'API Speedup', value: '+40%' },
+    ],
+  },
+  {
+    id: 'taskflow',
+    num: '04',
+    title: 'TaskFlow Manager',
+    tagline: 'Drag-and-drop Kanban for engineering teams',
+    description:
+      'Full-stack project management with real-time drag-and-drop Kanban boards, JWT auth, team workspaces, and deadline tracking. Improved workflow efficiency by 40%.',
+    tags: ['Next.js', 'Django', 'MongoDB', 'JWT', 'Tailwind'],
+    tagColor: 'cyan',
+    accent: '#06B6D4',
+    accentGlow: 'rgba(6,182,212,0.2)',
+    accentBorder: 'rgba(6,182,212,0.25)',
+    live: 'https://taskflow-manager-fullstack.vercel.app/login',
+    github: 'https://github.com/kazuha2004',
+    stats: [
+      { label: 'Efficiency Boost', value: '+40%' },
+      { label: 'Real-time Sync', value: 'WebSockets' },
     ],
   },
 ];
@@ -105,62 +105,75 @@ function DetectionBoxes() {
       ].map((box, i) => (
         <div
           key={i}
-          className="detection-box"
+          className="detection-box absolute border border-[#F59E0B]/30 bg-[#F59E0B]/5"
           style={{
             top: box.top, left: box.left,
             width: box.w, height: box.h,
-            animationDelay: box.delay,
-            animationDuration: '3s',
+            animation: `pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite ${box.delay}`,
           }}
         />
       ))}
       {/* Scan line */}
-      <div className="scan-line" style={{ animationDuration: '2s' }} />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-[#F59E0B]/80 shadow-[0_0_15px_rgba(245,158,11,0.8)]" style={{ animation: 'scan 2.5s ease-in-out infinite alternate' }} />
       {/* Label */}
       <div className="absolute bottom-3 left-3 right-3">
-        <div className="text-xs font-mono text-[#F59E0B] bg-black/60 px-2 py-1 rounded inline-block">
-          LUMIFACE_v2 · Confidence: 94.7%
+        <div className="text-xs font-mono text-[#F59E0B] bg-black/60 px-2 py-1 rounded inline-block border border-[#F59E0B]/30 backdrop-blur-md">
+          LUMIFACE_v2.0 · STATUS: TRACKING
         </div>
       </div>
       {/* Corner brackets */}
-      <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#F59E0B]/40 rounded-tl-sm" />
-      <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#F59E0B]/40 rounded-tr-sm" />
-      <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#F59E0B]/40 rounded-bl-sm" />
-      <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#F59E0B]/40 rounded-br-sm" />
+      <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#F59E0B]/60 rounded-tl-sm" />
+      <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#F59E0B]/60 rounded-tr-sm" />
+      <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#F59E0B]/60 rounded-bl-sm" />
+      <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#F59E0B]/60 rounded-br-sm" />
+      
+      <style>{`
+        @keyframes scan {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(320px); }
+        }
+      `}</style>
     </div>
   );
 }
 
-function KanbanDemo({ accent }: { accent: string }) {
-  const cols = ['To Do', 'In Progress', 'Done'];
-  const cards = [
-    { col: 0, text: 'Design system setup' },
-    { col: 0, text: 'Auth flow' },
-    { col: 1, text: 'Kanban board' },
-    { col: 1, text: 'API integration' },
-    { col: 2, text: 'User testing' },
-    { col: 2, text: 'Deploy to Vercel' },
-  ];
-
+function IframePreview({ url, accent }: { url: string, accent: string }) {
+  const [loaded, setLoaded] = useState(false);
+  
   return (
-    <div className="w-full h-full bg-[#0D0D0D] rounded-xl overflow-hidden p-4 flex gap-3">
-      {cols.map((col, ci) => (
-        <div key={col} className="flex-1 flex flex-col gap-2">
-          <div className="text-xs font-semibold text-[#52525B] uppercase tracking-wider px-1 mb-1">{col}</div>
-          {cards.filter(c => c.col === ci).map((c, i) => (
-            <div
-              key={i}
-              className="px-3 py-2.5 rounded-lg text-xs text-[#A1A1AA] transition-transform hover:-translate-y-0.5"
-              style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: `1px solid ${ci === 1 ? accent + '33' : 'rgba(255,255,255,0.05)'}`,
-              }}
-            >
-              {c.text}
-            </div>
-          ))}
+    <div className="relative w-full h-full bg-[#050505] rounded-xl overflow-hidden group">
+      {/* Browser Bar */}
+      <div className="absolute top-0 left-0 right-0 h-8 bg-[#111] border-b border-white/5 flex items-center px-3 gap-1.5 z-10">
+        <div className="w-2.5 h-2.5 rounded-full bg-[#333]" />
+        <div className="w-2.5 h-2.5 rounded-full bg-[#333]" />
+        <div className="w-2.5 h-2.5 rounded-full bg-[#333]" />
+        <div className="mx-auto text-[10px] font-mono text-[#555] truncate px-4 max-w-[60%]">{url.replace('https://', '')}</div>
+      </div>
+      
+      {/* Iframe Scaled */}
+      <div className="absolute top-8 left-0 right-0 bottom-0 overflow-hidden bg-[#0a0a0a]">
+        {!loaded && (
+          <div className="absolute inset-0 flex flex-col gap-3 items-center justify-center">
+             <div className="w-6 h-6 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: accent, borderTopColor: 'transparent' }} />
+             <span className="text-[10px] tracking-widest text-white/40 uppercase">Loading Live Preview</span>
+          </div>
+        )}
+        <div className="w-[200%] h-[200%] origin-top-left scale-50 transition-transform duration-700 ease-out group-hover:scale-[0.52]">
+          <iframe 
+            src={url} 
+            className="w-full h-full border-none pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity" 
+            loading="lazy"
+            onLoad={() => setLoaded(true)}
+          />
         </div>
-      ))}
+      </div>
+      
+      {/* Hover Overlay */}
+      <a href={url} target="_blank" rel="noopener noreferrer" className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20 cursor-pointer backdrop-blur-[2px]">
+        <div className="px-5 py-2.5 rounded-full bg-black/80 backdrop-blur-md text-white text-xs font-semibold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" style={{ border: `1px solid ${accent}`}}>
+          Open Live Site <ExternalLink size={14} />
+        </div>
+      </a>
     </div>
   );
 }
@@ -176,15 +189,16 @@ function ProjectCard({ project }: { project: Project }) {
       data-cursor="drag"
       style={{ background: `radial-gradient(ellipse at 40% 50%, ${project.accentGlow} 0%, transparent 60%)` }}
     >
-      <div className="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
         {/* Left: content */}
         <div className="flex flex-col gap-6">
           {/* Badges */}
           <div className="flex flex-wrap gap-2">
             <span className="section-label">{project.num}</span>
             {project.patent && (
-              <span className="px-3 py-1 text-xs rounded-full font-semibold"
+              <span className="px-3 py-1 text-[10px] uppercase tracking-wider rounded-full font-bold flex items-center gap-1.5"
                 style={{ background: 'rgba(245,158,11,0.15)', border: '1px solid rgba(245,158,11,0.3)', color: '#F59E0B' }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
                 {project.patent}
               </span>
             )}
@@ -197,14 +211,14 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
 
           <div>
-            <h2 className="text-display-md font-black text-white mb-2 leading-none"
+            <h2 className="text-2xl sm:text-display-md font-black text-white mb-1 sm:mb-2 leading-none"
               style={{ textShadow: `0 0 40px ${project.accentGlow}` }}>
               {project.title}
             </h2>
-            <p className="text-base font-medium" style={{ color: project.accent }}>{project.tagline}</p>
+            <p className="text-xs sm:text-base font-medium" style={{ color: project.accent }}>{project.tagline}</p>
           </div>
 
-          <p className="text-sm text-[#71717A] leading-relaxed max-w-md">{project.description}</p>
+          <p className="text-xs sm:text-sm text-[#71717A] leading-relaxed max-w-md">{project.description}</p>
 
           {/* Stats */}
           <div className="flex flex-wrap gap-6">
@@ -236,7 +250,7 @@ function ProjectCard({ project }: { project: Project }) {
                   boxShadow: `0 0 20px ${project.accentGlow}`,
                 }}
               >
-                Live Demo <ExternalLink size={14} />
+                Live Website <ExternalLink size={14} />
               </a>
             )}
             {project.live === '#' && (
@@ -244,7 +258,7 @@ function ProjectCard({ project }: { project: Project }) {
                 className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white/60 cursor-not-allowed"
                 style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
               >
-                Private Repo
+                Private Deployment
               </span>
             )}
             <a
@@ -260,48 +274,15 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         {/* Right: visual */}
-        <div className="relative h-[320px] lg:h-[400px] rounded-2xl overflow-hidden"
+        <div className="relative h-[200px] sm:h-[320px] lg:h-[400px] rounded-2xl overflow-hidden shadow-2xl"
           style={{ border: `1px solid ${project.accentBorder}` }}>
+          
           {project.id === 'lumiface' && <DetectionBoxes />}
-          {project.id === 'taskflow' && <KanbanDemo accent={project.accent} />}
-          {project.id === 'ai-interviewer' && (
-            <div className="w-full h-full bg-[#0D0D0D] p-5 font-mono text-xs overflow-hidden">
-              <div className="text-[#7C3AED] mb-2">AI Interviewer v2.1.0</div>
-              {[
-                { role: 'AI', text: "Walk me through how you'd design a URL shortener at scale.", delay: '0s' },
-                { role: 'User', text: "I'd use a hash function with base62 encoding, store in Redis...", delay: '0.3s' },
-                { role: 'AI', text: 'Good. How would you handle hash collisions?', delay: '0.6s' },
-                { role: 'User', text: 'Collision chain with a counter suffix, or just rehash...', delay: '0.9s' },
-                { role: 'AI', text: '✓ Score: 8.5/10 — Excellent distributed systems thinking.', delay: '1.2s' },
-              ].map((line, i) => (
-                <div key={i} className="mb-3 opacity-0"
-                  style={{ animation: `fade-in 0.5s ease-out ${line.delay} forwards` }}>
-                  <span className={line.role === 'AI' ? 'text-[#7C3AED]' : 'text-[#06B6D4]'}>
-                    {line.role === 'AI' ? '🤖 AI:' : '👤 You:'}&nbsp;
-                  </span>
-                  <span className="text-[#A1A1AA]">{line.text}</span>
-                </div>
-              ))}
-            </div>
+          
+          {project.live !== '#' && (
+            <IframePreview url={project.live} accent={project.accent} />
           )}
-          {project.id === 'kazuha-closet' && (
-            <div className="w-full h-full bg-[#0D0D0D] p-5 overflow-hidden">
-              <div className="text-xs text-[#F43F5E] font-semibold mb-3">kazuhacloset.in · Live</div>
-              <div className="grid grid-cols-2 gap-3">
-                {['Summer Drop', 'Casual Wear', 'Ethnic Fusion', 'Accessories'].map((item, i) => (
-                  <div key={item} className="rounded-lg overflow-hidden aspect-[3/4] relative"
-                    style={{
-                      background: `hsl(${330 + i * 20}, 30%, ${12 + i * 3}%)`,
-                      border: '1px solid rgba(244,63,94,0.15)',
-                    }}>
-                    <div className="absolute bottom-0 left-0 right-0 p-2">
-                      <p className="text-[10px] font-medium text-white/80">{item}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+
           {/* Glow overlay */}
           <div className="absolute inset-0 pointer-events-none"
             style={{ background: `radial-gradient(circle at 50% 0%, ${project.accentGlow} 0%, transparent 60%)` }} />
@@ -316,15 +297,13 @@ export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    let gsap: typeof import('gsap')['gsap'] | undefined;
-    let ScrollTrigger: typeof import('gsap/ScrollTrigger')['ScrollTrigger'] | undefined;
-    let ctx: import('gsap')['gsap']['Context'];
+    let ctx: any;
 
     const init = async () => {
       const gsapMod = await import('gsap');
       const stMod = await import('gsap/ScrollTrigger');
-      gsap = gsapMod.gsap;
-      ScrollTrigger = stMod.ScrollTrigger;
+      const gsap = gsapMod.gsap;
+      const ScrollTrigger = stMod.ScrollTrigger;
       gsap.registerPlugin(ScrollTrigger);
 
       const track = trackRef.current;
@@ -333,16 +312,14 @@ export default function Projects() {
 
       // Use GSAP context for React 18 strict mode safety
       ctx = gsap.context(() => {
-        gsap!.to(track, {
-          xPercent: -100 * (PROJECTS.length - 1) / PROJECTS.length,
+        gsap.to(track, {
+          xPercent: -100 * (PROJECTS.length - 1) / PROJECTS.length, // -75% for 4 items
           ease: 'none',
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: () => `+=${track.scrollWidth - window.innerWidth + window.innerHeight}`,
+            end: 'bottom bottom',
             scrub: 1,
-            pin: true,
-            anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
@@ -357,26 +334,40 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="relative overflow-hidden">
-      {/* Section label — outside pin */}
-      <div className="absolute top-8 left-6 z-20 flex items-center gap-3">
-        <span className="section-label">03 — Projects</span>
-      </div>
+    <>
+      {/* Desktop: horizontal scroll */}
+      <section id="projects" ref={sectionRef} className="relative bg-[#0A0A0A] hidden md:block" style={{ height: `${PROJECTS.length * 100}vh` }}>
+        <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
+          {/* Section label */}
+          <div className="absolute top-8 left-6 z-20 flex items-center gap-3">
+            <span className="section-label">03 — Projects</span>
+          </div>
 
-      <div
-        ref={trackRef}
-        className="flex w-max"
-        style={{ willChange: 'transform' }}
-      >
-        {PROJECTS.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+          <div
+            ref={trackRef}
+            className="flex w-max h-full will-change-transform"
+          >
+            {PROJECTS.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Scroll continue hint */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40 pointer-events-none">
-        <span className="text-[10px] tracking-widest uppercase text-[#52525B]">Scroll to continue ↓</span>
-      </div>
-    </section>
+      {/* Mobile: vertical stack */}
+      <section id="projects-mobile" className="relative bg-[#0A0A0A] md:hidden py-16 px-4">
+        <div className="flex items-center gap-3 mb-10">
+          <span className="section-label">03 — Projects</span>
+          <span className="flex-1 h-px bg-white/5" />
+        </div>
+        <div className="flex flex-col gap-16">
+          {PROJECTS.map((project) => (
+            <div key={project.id} className="w-full">
+              <ProjectCard project={project} />
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

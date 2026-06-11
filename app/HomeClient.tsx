@@ -10,6 +10,7 @@ import Projects from '@/components/sections/Projects';
 import Skills from '@/components/sections/Skills';
 import Achievements from '@/components/sections/Achievements';
 import Contact from '@/components/sections/Contact';
+import CommandPalette from '@/components/ui/CommandPalette';
 
 export default function HomeClient() {
   const [loaded, setLoaded] = useState(false);
@@ -18,6 +19,7 @@ export default function HomeClient() {
   return (
     <>
       <LoadingScreen onComplete={() => setLoaded(true)} />
+      <CommandPalette />
       <CustomCursor />
       <Navbar />
       <main

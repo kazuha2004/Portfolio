@@ -16,17 +16,26 @@ export function useLenis() {
 
       // Sync GSAP ScrollTrigger with Lenis
       try {
+        const gsapMod = await import('gsap');
         const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+        
         lenis.on('scroll', ScrollTrigger.update);
+        
+        gsapMod.default.ticker.add((time) => {
+          lenis?.raf(time * 1000);
+        });
+        
+        gsapMod.default.ticker.lagSmoothing(0);
       } catch {
         // GSAP not needed here
+        const raf = (time: number) => {
+          lenis!.raf(time);
+          rafId = requestAnimationFrame(raf);
+        };
+        rafId = requestAnimationFrame(raf);
       }
 
-      const raf = (time: number) => {
-        lenis!.raf(time);
-        rafId = requestAnimationFrame(raf);
-      };
-      rafId = requestAnimationFrame(raf);
+
     };
 
     init();

@@ -1,5 +1,5 @@
 'use client';
-import TagSphere from '@/components/ui/TagSphere';
+import SkillsGalaxyScene from '@/components/ui/SkillsGalaxyScene';
 
 const SKILL_GROUPS = [
   {
@@ -30,41 +30,36 @@ const SKILL_GROUPS = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-32 overflow-hidden">
+    <section id="skills" className="relative py-16 sm:py-24 md:py-32 overflow-hidden">
       {/* Ambient */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(124,58,237,0.05) 0%, transparent 60%)' }} />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Label */}
-        <div className="flex items-center gap-3 mb-20">
+        <div className="flex items-center gap-3 mb-10 sm:mb-16 md:mb-20">
           <span className="section-label">04 — Skills</span>
           <span className="flex-1 h-px bg-white/5" />
         </div>
 
         {/* Heading */}
-        <div className="mb-16 max-w-2xl">
+        <div className="mb-10 sm:mb-16 max-w-2xl">
           <h2 className="text-display-lg font-black text-white leading-none mb-4">
             The{' '}
             <span className="gradient-text-purple">Arsenal</span>
           </h2>
-          <p className="text-[#71717A] text-base">
+          <p className="text-[#71717A] text-sm sm:text-base">
             Tools I've used in production. No progress bars — just shipped code.
           </p>
         </div>
 
-        {/* Tag Sphere */}
-        <div className="flex justify-center mb-20">
-          <div className="relative">
-            {/* Glow behind sphere */}
-            <div className="absolute inset-0 rounded-full pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%)', filter: 'blur(40px)' }} />
-            <TagSphere />
-          </div>
+        {/* 3D Skills Galaxy */}
+        <div className="mb-20">
+          <SkillsGalaxyScene />
         </div>
 
         {/* Grouped pills */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
           {SKILL_GROUPS.map((group) => (
             <div
               key={group.category}

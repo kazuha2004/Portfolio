@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import TrophyRoomScene from '@/components/ui/TrophyRoomScene';
 
 const TIMELINE = [
   {
@@ -90,81 +91,29 @@ export default function Achievements() {
   }, []);
 
   return (
-    <section id="achievements" ref={sectionRef} className="relative py-32 overflow-hidden">
+    <section id="achievements" ref={sectionRef} className="relative py-16 sm:py-24 md:py-32 overflow-hidden">
       {/* Ambient */}
       <div className="absolute top-0 left-0 w-[600px] h-[600px] pointer-events-none"
         style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.04) 0%, transparent 70%)' }} />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Label */}
-        <div className="flex items-center gap-3 mb-20">
+        <div className="flex items-center gap-3 mb-10 sm:mb-16 md:mb-20">
           <span className="section-label">05 — Achievements</span>
           <span className="flex-1 h-px bg-white/5" />
         </div>
 
         {/* Heading */}
-        <div className="mb-20 max-w-2xl">
+        <div className="mb-10 sm:mb-16 md:mb-20 max-w-2xl">
           <h2 className="text-display-lg font-black text-white leading-none mb-4">
             The{' '}
             <span className="gradient-text-cyan">Trophy Room</span>
           </h2>
         </div>
 
-        {/* Timeline */}
-        <div className="relative mb-28">
-          {/* SVG timeline line */}
-          <svg
-            className="absolute left-4 md:left-8 top-0 bottom-0 h-full pointer-events-none"
-            width="2"
-            style={{ overflow: 'visible' }}
-          >
-            <path
-              ref={pathRef}
-              d={`M1,0 L1,${TIMELINE.length * 120}`}
-              stroke="rgba(124,58,237,0.4)"
-              strokeWidth="2"
-              fill="none"
-              strokeLinecap="round"
-            />
-          </svg>
-
-          {/* Timeline items */}
-          <div className="flex flex-col gap-10 pl-12 md:pl-20">
-            {TIMELINE.map((item, i) => (
-              <div
-                key={i}
-                className="relative flex gap-6 group"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              >
-                {/* Node dot */}
-                <div
-                  className="absolute -left-8 md:-left-12 top-1.5 w-3 h-3 rounded-full border-2 flex-shrink-0 transition-all duration-300 group-hover:scale-150"
-                  style={{
-                    background: item.accent,
-                    borderColor: item.accent,
-                    boxShadow: item.highlight ? `0 0 12px ${item.accent}` : 'none',
-                  }}
-                />
-
-                {/* Content */}
-                <div className="flex-1">
-                  <span className="text-xs font-mono text-[#52525B] mb-1 block">{item.year}</span>
-                  <h3 className={`font-semibold text-base mb-1 transition-colors group-hover:text-white ${item.highlight ? 'text-white' : 'text-[#D4D4D8]'}`}>
-                    {item.title}
-                    {item.highlight && (
-                      <span className="ml-2 text-[10px] px-2 py-0.5 rounded-full font-bold"
-                        style={{ background: `${item.accent}22`, color: item.accent, border: `1px solid ${item.accent}44` }}>
-                        ★ HIGHLIGHT
-                      </span>
-                    )}
-                  </h3>
-                  <p className="text-sm text-[#52525B] leading-relaxed group-hover:text-[#71717A] transition-colors">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Constellation 3D Scene */}
+        <div className="mb-16 sm:mb-28">
+           <TrophyRoomScene />
         </div>
 
         {/* Certifications flip cards */}
@@ -172,7 +121,7 @@ export default function Achievements() {
           <h3 className="text-sm font-bold tracking-[0.12em] uppercase text-[#52525B] mb-8">
             Certifications — Hover to see what I learned
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
             {CERTS.map((cert) => (
               <div key={cert.front} className="flip-card h-32">
                 <div className="flip-card-inner">
@@ -194,7 +143,7 @@ export default function Achievements() {
           <h3 className="text-sm font-bold tracking-[0.12em] uppercase text-[#52525B] mb-8">
             Competitive Programming
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {DSA_PLATFORMS.map((p) => (
               <div
                 key={p.name}

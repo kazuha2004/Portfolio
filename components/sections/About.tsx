@@ -140,33 +140,33 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="relative py-32 overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative py-16 sm:py-24 md:py-32 overflow-hidden">
       {/* Ambient */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] pointer-events-none"
         style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.04) 0%, transparent 70%)' }} />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Label */}
-        <div className="flex items-center gap-3 mb-20">
+        <div className="flex items-center gap-3 mb-10 sm:mb-16 md:mb-20">
           <span className="section-label">02 — About</span>
           <span className="flex-1 h-px bg-white/5" />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-24 min-w-0">
           {/* Left — Sticky cube */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="lg:sticky lg:top-32">
               {/* 3D Cube */}
-              <div className="relative rounded-2xl overflow-hidden mb-8"
-                style={{ height: 320, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <div className="relative rounded-2xl overflow-hidden mb-6 sm:mb-8 h-[220px] md:h-[320px]"
+                style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
                 <TechCube />
                 <div className="absolute inset-0 pointer-events-none"
                   style={{ background: 'radial-gradient(circle at 50% 50%, rgba(124,58,237,0.05) 0%, transparent 70%)' }} />
               </div>
 
               {/* Quick bio */}
-              <div className="rounded-xl p-6" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                <p className="text-sm text-[#A1A1AA] leading-relaxed">
+              <div className="rounded-xl p-4 sm:p-6 break-words overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed">
                   B.Tech CSE @ IIMT College of Engineering (2022–26). I turn ideas into production-grade software — from AI-powered attendance systems to founder-led e-commerce platforms. I don&apos;t just code; I ship.
                 </p>
               </div>
@@ -181,9 +181,9 @@ export default function About() {
           </div>
 
           {/* Right — Stats + Marquee */}
-          <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-10 sm:gap-16 min-w-0">
             {/* Stat counters */}
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-2 gap-6 sm:gap-10">
               {STATS.map((s) => (
                 <StatCounter key={s.label} {...s} animate={animating} />
               ))}
@@ -193,27 +193,31 @@ export default function About() {
             <div className="h-px bg-white/5" />
 
             {/* About text blocks */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-5 sm:gap-6">
               {[
                 {
                   title: 'Builder First',
                   text: 'Every project I take on has real users. From a 500-face/day attendance system to an e-commerce platform, I prioritize shipping over perfection.',
                 },
                 {
-                  title: 'Research-Driven',
-                  text: 'Patent holder for LUMIFACE — an AI-powered facial recognition attendance system. Filed under App No: 202511051742.',
+                  title: 'Research & Innovation',
+                  text: 'Patent holder for LUMIFACE — an AI-powered facial recognition attendance system. Filed under App No: 202511051742 A.',
                 },
                 {
                   title: 'Competitive Edge',
-                  text: 'ICPC Asia Kanpur Regionals participant. 450+ DSA problems across LeetCode, GFG, and CodeChef (3★).',
+                  text: 'ICPC Asia Kanpur Regionals participant. 450+ DSA problems solved across LeetCode, GFG, and CodeChef.',
+                },
+                {
+                  title: 'Experience: Bharat Intern',
+                  text: 'Dec 2023 – Jan 2024. Built robust frontend architectures focusing on responsive web development, robust REST API integrations, and agile Git collaboration.',
                 },
               ].map((block) => (
-                <div key={block.title} className="flex gap-4">
+                <div key={block.title} className="flex gap-3 sm:gap-4 overflow-hidden">
                   <div className="mt-1 w-1 flex-shrink-0 rounded-full self-stretch"
                     style={{ background: 'linear-gradient(to bottom, #7C3AED, transparent)', minHeight: 20 }} />
-                  <div>
-                    <h3 className="text-sm font-semibold text-white mb-1">{block.title}</h3>
-                    <p className="text-sm text-[#71717A] leading-relaxed">{block.text}</p>
+                  <div className="flex-1 min-w-0 break-words">
+                    <h3 className="text-xs sm:text-sm font-semibold text-white mb-1 truncate">{block.title}</h3>
+                    <p className="text-xs sm:text-sm text-[#71717A] leading-relaxed">{block.text}</p>
                   </div>
                 </div>
               ))}
@@ -223,7 +227,7 @@ export default function About() {
             <div className="h-px bg-white/5" />
 
             {/* Marquee */}
-            <div>
+            <div className="min-w-0">
               <p className="section-label mb-4">Tech Stack</p>
               <Marquee />
             </div>

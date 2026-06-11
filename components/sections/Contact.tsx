@@ -54,16 +54,16 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-40 overflow-hidden">
+    <section id="contact" className="relative py-20 sm:py-28 md:py-40 overflow-hidden">
       {/* Ambient glows */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at 50% 60%, rgba(124,58,237,0.07) 0%, transparent 60%)' }} />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] pointer-events-none"
         style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.04) 0%, transparent 70%)' }} />
 
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
         {/* Label */}
-        <div className="flex items-center justify-center gap-3 mb-16">
+        <div className="flex items-center justify-center gap-3 mb-8 sm:mb-12 md:mb-16">
           <span className="w-8 h-px bg-[#7C3AED]/60" />
           <span className="section-label">06 — Contact</span>
           <span className="w-8 h-px bg-[#7C3AED]/60" />
@@ -78,15 +78,15 @@ export default function Contact() {
             style={{ background: '#7C3AED', animation: 'blink 1s step-end infinite', verticalAlign: 'middle' }} />
         </h2>
 
-        <p className="text-lg text-[#71717A] mb-12 max-w-md mx-auto">
+        <p className="text-sm sm:text-base md:text-lg text-[#71717A] mb-8 sm:mb-12 max-w-md mx-auto">
           Open to full-time roles, freelance projects, and exciting collaborations. Let&apos;s talk.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-wrap gap-4 justify-center mb-16">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 sm:mb-16">
           <a
             href="mailto:priyanshushukla0608@gmail.com?subject=Hello Priyanshu!&body=Hi Priyanshu, I came across your portfolio and..."
-            className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl text-sm font-semibold text-white overflow-hidden transition-all duration-300"
+            className="group relative inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm font-semibold text-white overflow-hidden transition-all duration-300"
             style={{ background: 'linear-gradient(135deg, #7C3AED, #5B21B6)', boxShadow: '0 0 30px rgba(124,58,237,0.3)' }}
           >
             <span className="relative z-10 flex items-center gap-2">
@@ -100,7 +100,7 @@ export default function Contact() {
           {/* Copy email */}
           <button
             onClick={copyEmail}
-            className="inline-flex items-center gap-2 px-6 py-4 rounded-xl text-sm font-medium transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-4 rounded-xl text-sm font-medium transition-all duration-300"
             style={{
               border: '1px solid rgba(255,255,255,0.08)',
               background: copied ? 'rgba(34,197,94,0.08)' : 'rgba(255,255,255,0.03)',
@@ -159,7 +159,7 @@ export default function Contact() {
         </div>
 
         {/* Footer */}
-        <div className="mt-24 pt-8 border-t border-white/[0.04]">
+        <div className="mt-16 sm:mt-24 pt-6 sm:pt-8 border-t border-white/[0.04]">
           <p className="text-xs text-[#3F3F46]">
             Built by{' '}
             <span className="text-[#52525B]">Priyanshu Shukla</span>

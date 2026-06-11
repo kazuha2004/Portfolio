@@ -43,7 +43,7 @@ module.exports = {
         mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
       },
       fontSize: {
-        'display-xl': ['clamp(3rem, 8vw, 7rem)', { lineHeight: '1', letterSpacing: '-0.04em' }],
+        'display-xl': ['clamp(3rem, 9vw, 8rem)', { lineHeight: '1', letterSpacing: '-0.04em' }],
         'display-lg': ['clamp(2.5rem, 6vw, 5rem)', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
         'display-md': ['clamp(1.8rem, 4vw, 3rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
       },

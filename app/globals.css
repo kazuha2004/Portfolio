@@ -291,7 +291,8 @@ body {
 }
 
 .flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px -10px rgba(124, 58, 237, 0.3);
 }
 
 .flip-card-front,
@@ -307,16 +308,19 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .flip-card-front {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .flip-card-back {
   background: rgba(124, 58, 237, 0.08);
-  border: 1px solid rgba(124, 58, 237, 0.25);
+  border: 1px solid rgba(124, 58, 237, 0.4);
   transform: rotateY(180deg);
 }
 
@@ -461,7 +465,35 @@ body {
   #cursor-dot, #cursor-ring { display: none; }
   
   .project-panel {
-    padding: 60px 24px;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .stat-accent-line {
+    width: 28px;
+  }
+}
+
+/* Samsung Galaxy S20 and similar small phones (360px width) */
+@media (max-width: 400px) {
+  .project-panel {
+    padding: 0;
+  }
+
+  .skill-pill {
+    padding: 4px 10px;
+    font-size: 0.7rem;
+  }
+
+  .flip-card {
+    height: 120px !important;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
   }
 }
 
