@@ -1,4 +1,5 @@
 'use client';
+
 import SkillsGalaxyScene from '@/components/ui/SkillsGalaxyScene';
 
 const SKILL_GROUPS = [
@@ -8,7 +9,16 @@ const SKILL_GROUPS = [
   },
   {
     category: 'Frontend',
-    skills: ['Next.js', 'React', 'Three.js', 'GSAP', 'Framer Motion', 'Tailwind CSS', 'HTML5', 'CSS3'],
+    skills: [
+      'Next.js',
+      'React',
+      'Three.js',
+      'GSAP',
+      'Framer Motion',
+      'Tailwind CSS',
+      'HTML5',
+      'CSS3',
+    ],
   },
   {
     category: 'Backend',
@@ -20,7 +30,14 @@ const SKILL_GROUPS = [
   },
   {
     category: 'AI / ML',
-    skills: ['OpenCV', 'TensorFlow', 'Computer Vision', 'LBPH', 'Haar Cascade', 'OpenAI API'],
+    skills: [
+      'OpenCV',
+      'TensorFlow',
+      'Computer Vision',
+      'LBPH',
+      'Haar Cascade',
+      'OpenAI API',
+    ],
   },
   {
     category: 'Tools & Cloud',
@@ -30,10 +47,18 @@ const SKILL_GROUPS = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-16 sm:py-24 md:py-32 overflow-hidden">
+    <section
+      id="skills"
+      className="relative py-16 sm:py-24 md:py-32 overflow-hidden"
+    >
       {/* Ambient */}
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(124,58,237,0.05) 0%, transparent 60%)' }} />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 30%, rgba(124,58,237,0.05) 0%, transparent 60%)',
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Label */}
@@ -45,11 +70,12 @@ export default function Skills() {
         {/* Heading */}
         <div className="mb-10 sm:mb-16 max-w-2xl">
           <h2 className="text-display-lg font-black text-white leading-none mb-4">
-            The{' '}
-            <span className="gradient-text-purple">Arsenal</span>
+            The <span className="gradient-text-purple">Arsenal</span>
           </h2>
+
           <p className="text-[#71717A] text-sm sm:text-base">
-            Tools I've used in production. No progress bars — just shipped code.
+            Tools I&apos;ve used in production. No progress bars — just shipped
+            code.
           </p>
         </div>
 
@@ -64,14 +90,20 @@ export default function Skills() {
             <div
               key={group.category}
               className="rounded-2xl p-6 group hover:border-white/10 transition-colors duration-300"
-              style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}
+              style={{
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px solid rgba(255,255,255,0.05)',
+              }}
             >
               <h3 className="text-xs font-bold tracking-[0.12em] uppercase text-[#52525B] mb-4 group-hover:text-[#7C3AED] transition-colors">
                 {group.category}
               </h3>
+
               <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
-                  <span key={skill} className="skill-pill">{skill}</span>
+                  <span key={skill} className="skill-pill">
+                    {skill}
+                  </span>
                 ))}
               </div>
             </div>
