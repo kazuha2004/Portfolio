@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { useLenis } from '@/hooks/useLenis';
-import CustomCursor from '@/components/ui/CustomCursor';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import Navbar from '@/components/ui/Navbar';
 import Hero from '@/components/sections/Hero';
@@ -20,7 +19,6 @@ export default function HomeClient() {
     <>
       <LoadingScreen onComplete={() => setLoaded(true)} />
       <CommandPalette />
-      <CustomCursor />
       <Navbar />
       <main
         className="relative"

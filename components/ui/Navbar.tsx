@@ -69,8 +69,9 @@ export default function Navbar() {
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="/resume/Priyanshu_Resume.pdf"
-              download
+              href="https://drive.google.com/file/d/13X9SjsDNBsfetqCPz_FwAgXQew_9j3Be/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm px-4 py-2 rounded-lg border border-[#7C3AED]/40 text-[#A1A1AA] hover:text-white hover:border-[#7C3AED] hover:bg-[#7C3AED]/10 transition-all duration-300"
             >
               Resume
@@ -109,8 +110,8 @@ export default function Navbar() {
           </button>
         ))}
         <div className="flex gap-6 mt-8">
-          <a href="https://github.com/kazuha2004" target="_blank" rel="noopener" className="text-[#52525B] hover:text-white transition-colors text-sm">GitHub</a>
-          <a href="https://linkedin.com/in/priyanshu-shukla" target="_blank" rel="noopener" className="text-[#52525B] hover:text-white transition-colors text-sm">LinkedIn</a>
+          <a href="https://github.com/kazuha2004" target="_blank" rel="noopener noreferrer" className="text-[#52525B] hover:text-white transition-colors text-sm">GitHub</a>
+          <a href="https://www.linkedin.com/in/priyanshu-shukla-dev" target="_blank" rel="noopener noreferrer" className="text-[#52525B] hover:text-white transition-colors text-sm">LinkedIn</a>
           <a href="mailto:priyanshushukla0608@gmail.com" className="text-[#52525B] hover:text-white transition-colors text-sm">Email</a>
         </div>
       </div>

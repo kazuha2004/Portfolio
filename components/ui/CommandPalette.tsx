@@ -19,7 +19,7 @@ type Action = {
 };
 
 const ACTIONS: Action[] = [
-  { id: 'resume', name: 'Open Resume', icon: <FileText size={16} />, url: 'https://drive.google.com/file/d/13X9SjsDNBsfetqCPz_FwAgXQew_9j3Be/view', section: 'Links' },
+  { id: 'resume', name: 'Open Resume', icon: <FileText size={16} />, url: 'https://drive.google.com/file/d/13X9SjsDNBsfetqCPz_FwAgXQew_9j3Be/view?usp=sharing', section: 'Links' },
   { id: 'github', name: 'Open GitHub', icon: <GithubIcon size={16} />, url: 'https://github.com/kazuha2004', section: 'Links' },
   { id: 'ai-interviewer', name: 'Open AI Interviewer', icon: <MonitorSmartphone size={16} />, url: 'https://ai-interviewer-chi-henna.vercel.app/', section: 'Projects' },
   { id: 'kazuha-closet', name: 'Open Kazuha Closet', icon: <MonitorSmartphone size={16} />, url: 'https://www.kazuhacloset.com', section: 'Projects' },

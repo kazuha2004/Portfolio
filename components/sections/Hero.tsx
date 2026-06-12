@@ -121,11 +121,12 @@ export default function Hero() {
           </button>
 
           <a
-            href="/resume/Priyanshu_Resume.pdf"
-            download
+            href="https://drive.google.com/file/d/13X9SjsDNBsfetqCPz_FwAgXQew_9j3Be/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl text-sm font-semibold text-[#A1A1AA] border border-white/10 hover:border-[#7C3AED]/50 hover:text-white hover:bg-[#7C3AED]/8 transition-all duration-300 text-center"
           >
-            Download Resume
+            View Resume
           </a>
         </motion.div>
 

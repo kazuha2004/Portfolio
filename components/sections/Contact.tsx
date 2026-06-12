@@ -26,7 +26,7 @@ const SOCIALS = [
   {
     icon: LinkedinIcon,
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/priyanshu-shukla',
+    href: 'https://www.linkedin.com/in/priyanshu-shukla-dev',
     delay: '0.5s',
   },
   {
