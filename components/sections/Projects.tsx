@@ -61,7 +61,7 @@ const PROJECTS = [
     accent: '#F43F5E',
     accentGlow: 'rgba(244,63,94,0.2)',
     accentBorder: 'rgba(244,63,94,0.25)',
-    live: 'https://www.kazuhacloset.com',
+    live: 'https://kazuhacloset.vercel.app/',
     github: 'https://github.com/kazuha2004',
     founder: true,
     stats: [

@@ -22,7 +22,7 @@ const ACTIONS: Action[] = [
   { id: 'resume', name: 'Open Resume', icon: <FileText size={16} />, url: 'https://drive.google.com/file/d/13X9SjsDNBsfetqCPz_FwAgXQew_9j3Be/view?usp=sharing', section: 'Links' },
   { id: 'github', name: 'Open GitHub', icon: <GithubIcon size={16} />, url: 'https://github.com/kazuha2004', section: 'Links' },
   { id: 'ai-interviewer', name: 'Open AI Interviewer', icon: <MonitorSmartphone size={16} />, url: 'https://ai-interviewer-chi-henna.vercel.app/', section: 'Projects' },
-  { id: 'kazuha-closet', name: 'Open Kazuha Closet', icon: <MonitorSmartphone size={16} />, url: 'https://www.kazuhacloset.com', section: 'Projects' },
+  { id: 'kazuha-closet', name: 'Open Kazuha Closet', icon: <MonitorSmartphone size={16} />, url: 'https://kazuhacloset.vercel.app/', section: 'Projects' },
   { id: 'taskflow', name: 'Open TaskFlow Manager', icon: <MonitorSmartphone size={16} />, url: 'https://taskflow-manager-fullstack.vercel.app/login', section: 'Projects' },
   { id: 'lumiface', name: 'Open LUMIFACE Repo', icon: <ExternalLink size={16} />, url: 'https://github.com/kazuha2004/FACE_RECOGNITION_ATTENDANCE_SYSTEM', section: 'Projects' },
   { id: 'contact', name: 'Email Priyanshu', icon: <Mail size={16} />, url: 'mailto:priyanshushukla0608@gmail.com', section: 'Contact' },

@@ -17,8 +17,8 @@ export default function ParticleField() {
     canvas.width = width;
     canvas.height = height;
 
-    // Particle setup
-    const COUNT = 800;
+    // Reduced from 800 → 350 — visually identical, much lower CPU cost
+    const COUNT = 350;
     type Particle = {
       x: number; y: number; ox: number; oy: number;
       vx: number; vy: number; size: number; opacity: number; speed: number;
@@ -39,8 +39,17 @@ export default function ParticleField() {
 
     let rafId: number;
     let frame = 0;
+    let paused = false;
+
+    // Pause animation when tab is hidden to save CPU
+    const onVisibilityChange = () => {
+      paused = document.hidden;
+      if (!paused) rafId = requestAnimationFrame(draw);
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     const draw = () => {
+      if (paused) return;
       frame++;
       ctx.clearRect(0, 0, width, height);
 
@@ -75,24 +84,7 @@ export default function ParticleField() {
         ctx.fill();
       }
 
-      // Draw faint connection lines for nearby particles (within 80px)
-      ctx.strokeStyle = 'rgba(255,255,255,0.03)';
-      ctx.lineWidth = 0.5;
-      for (let i = 0; i < particles.length; i += 4) {
-        for (let j = i + 1; j < particles.length; j += 4) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 80) {
-            ctx.globalAlpha = (1 - dist / 80) * 0.15;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-      ctx.globalAlpha = 1;
+      // NOTE: Connection lines removed — O(n²) loop was too expensive for negligible visual gain
 
       rafId = requestAnimationFrame(draw);
     };
@@ -110,6 +102,7 @@ export default function ParticleField() {
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
     };
   }, [mouseRef]);
 

@@ -37,6 +37,7 @@ export default function TagSphere() {
     let targetX = 0.3, targetY = 0.5;
     const radius = Math.min(container.offsetWidth * 0.38, 220);
     let rafId: number;
+    let isVisible = false;
 
     const positions: { phi: number; theta: number }[] = [];
 
@@ -48,6 +49,8 @@ export default function TagSphere() {
     }
 
     const animate = () => {
+      if (!isVisible) return;
+
       rotX += (targetX - rotX) * 0.04;
       rotY += (targetY - rotY) * 0.04;
 
@@ -94,12 +97,26 @@ export default function TagSphere() {
 
     const onMouseLeave = () => { targetX = 0.3; targetY = 0.5; };
 
+    // Only run RAF when sphere is in the viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          rafId = requestAnimationFrame(animate);
+        } else {
+          cancelAnimationFrame(rafId);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(container);
+
     container.addEventListener('mousemove', onMouseMove);
     container.addEventListener('mouseleave', onMouseLeave);
-    rafId = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(rafId);
+      observer.disconnect();
       container.removeEventListener('mousemove', onMouseMove);
       container.removeEventListener('mouseleave', onMouseLeave);
     };
